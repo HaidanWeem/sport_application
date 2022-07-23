@@ -14,8 +14,7 @@ class RegistrationBodyWidget extends StatelessWidget {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
       if (state is AuthenticationSuccess) {
-        print('Success!');
-        Navigator.of(context).pushNamed(MainNavigation.homePage);
+        Navigator.of(context).pushNamedAndRemoveUntil(MainNavigation.homePage,(Route<dynamic> route) => false);
       } else if (state is AuthenticationFailure) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Something went wrong: Registration failure')));
@@ -36,6 +35,8 @@ class RegistrationBodyWidget extends StatelessWidget {
               children: [
                 TextFieldNameWidget(),
                 TextFieldEmailWidget(),
+                SliderAgeWidget(),
+                SliderWeightWidget(),
                 TextFieldPasswordWidget(),
                 TextFieldConfirmPasswordWidget(),
                 ButtonSignUpWidget(),
@@ -45,6 +46,70 @@ class RegistrationBodyWidget extends StatelessWidget {
         ),
       );
     });
+  }
+}
+
+class SliderAgeWidget extends StatelessWidget {
+  const SliderAgeWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Text(
+            'Age',
+            style: TextStyle(
+                color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Slider(
+          activeColor: Colors.black,
+          max: 100,
+          inactiveColor: Colors.grey,
+          divisions: 100,
+          label: context.watch<SignUpModel>().ageValue.round().toString(),
+          value: context.watch<SignUpModel>().ageValue,
+          onChanged: (double value) {
+            context.read<SignUpModel>().onChangedAgeValue(value);
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class SliderWeightWidget extends StatelessWidget {
+  const SliderWeightWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Text(
+            'Weight',
+            style: TextStyle(
+                color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Slider(
+          activeColor: Colors.black,
+          max: 200,
+          inactiveColor: Colors.grey,
+          divisions: 200,
+          label: context.watch<SignUpModel>().weightValue.round().toString(),
+          value: context.watch<SignUpModel>().weightValue,
+          onChanged: (double value) {
+            context.read<SignUpModel>().onChangedWeightValue(value);
+          },
+        ),
+      ],
+    );
   }
 }
 

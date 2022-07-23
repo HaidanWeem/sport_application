@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_bloc.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_event.dart';
 
-
 class SignInModel extends ChangeNotifier {
   final formKeySignIn = GlobalKey<FormState>();
 
@@ -47,6 +46,9 @@ class SignInModel extends ChangeNotifier {
 class SignUpModel extends ChangeNotifier {
   final formKeySignUp = GlobalKey<FormState>();
 
+  double ageValue = 1;
+  double weightValue = 1.0;
+
   bool isHideCharacters = true;
   final name = TextEditingController();
   final login = TextEditingController();
@@ -56,9 +58,25 @@ class SignUpModel extends ChangeNotifier {
   void signUp(BuildContext context) {
     if (formKeySignUp.currentState!.validate()) {
       BlocProvider.of<AuthenticationBloc>(context).add(
-        SignUpStarted(login.text, password.text),
+        SignUpStarted(
+          login.text,
+          password.text,
+          name.text,
+          ageValue.toString(),
+          weightValue.toString(),
+        ),
       );
     }
+  }
+
+  void onChangedAgeValue(double value) {
+    ageValue = value;
+    notifyListeners();
+  }
+
+  void onChangedWeightValue(double value) {
+    weightValue = value;
+    notifyListeners();
   }
 
   void isVisibilityPassword() {

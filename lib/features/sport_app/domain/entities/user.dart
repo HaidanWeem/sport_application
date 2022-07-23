@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable {
+class CurrentUser extends Equatable {
   final String name;
   final String email;
   final int age;
   final int weight;
 
-  User({
+  CurrentUser({
     required this.name,
     required this.email,
     required this.age,

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:sport_app/core/error/auth_error/auth_failure.dart';
+import 'package:sport_app/features/sport_app/domain/entities/user.dart';
 
 abstract class AuthenticationState extends Equatable {
   const AuthenticationState();
@@ -19,11 +19,10 @@ class AuthenticationIsLoading extends AuthenticationState {
 }
 
 class AuthenticationSuccess extends AuthenticationState {
-  final String? displayName;
-  const AuthenticationSuccess({this.displayName});
+  AuthenticationSuccess();
 
   @override
-  List<Object?> get props => [displayName];
+  List<Object?> get props => [];
 }
 
 class AuthenticationFailure extends AuthenticationState {

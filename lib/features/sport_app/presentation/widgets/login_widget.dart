@@ -6,7 +6,6 @@ import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_b
 import 'package:sport_app/features/sport_app/presentation/provider/provider_auth/provider_auth.dart';
 import 'package:sport_app/main_navigation.dart';
 
-
 class LoginBodyWidget extends StatelessWidget {
   const LoginBodyWidget({Key? key}) : super(key: key);
 
@@ -14,7 +13,7 @@ class LoginBodyWidget extends StatelessWidget {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
         if (state is AuthenticationSuccess) {
-          Navigator.of(context).pushNamed(MainNavigation.homePage);
+          Navigator.of(context).pushReplacementNamed(MainNavigation.homePage);
         } else if (state is AuthenticationFailure) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('Something went wrong')));
@@ -98,7 +97,6 @@ class TextFieldPassword extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: TextFormField(
-
         validator: (value) => context.read<SignInModel>().validatePassword(),
         controller: context.read<SignInModel>().password,
         obscureText: context.watch<SignInModel>().isHideCharacters,

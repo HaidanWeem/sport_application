@@ -6,7 +6,8 @@ abstract class AuthRepository {
   Future<Either<Failure, MainUser>> joinToAccount(
       String email, String password);
   Future<Either<Failure, MainUser>> signUpAccount(
-      String email, String password);
+      String email, String password, String name,
+      String age, String weight);
   Stream<MainUser?> get currentUser;
   Future<String?> retrieveUserName(MainUser user);
   Future<void> signOut();
