@@ -18,8 +18,8 @@ class SignUpAccount extends UseCase<void, RegisterParams> {
 }
 
 class RegisterParams extends Equatable {
-  final String email, password, name,
-       age,  weight;
+  final String email, password, name;
+  final double age,  weight;
   RegisterParams({required this.name,required this.age, required this.weight, required this.email, required this.password});
   @override
   List<Object> get props => [email, password];

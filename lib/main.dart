@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_app/common/main_colors.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_bloc.dart';
+import 'package:sport_app/features/sport_app/presentation/bloc/main_bloc/main_bloc.dart';
 import 'package:sport_app/features/sport_app/presentation/pages/home_screen.dart';
 import 'package:sport_app/features/sport_app/presentation/pages/login_screen.dart';
 import 'package:sport_app/locator_service.dart';
@@ -26,12 +28,14 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthenticationBloc>(
             create: (context) => sl<AuthenticationBloc>()),
+        BlocProvider<MainBloc>(
+            create: (context) => sl<MainBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'SporteLite',
         theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
+          scaffoldBackgroundColor: MainColors.mainWhite,
         ),
         home: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),

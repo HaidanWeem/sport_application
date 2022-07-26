@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:sport_app/features/sport_app/domain/entities/user.dart';
+
 
 abstract class AuthenticationState extends Equatable {
   const AuthenticationState();

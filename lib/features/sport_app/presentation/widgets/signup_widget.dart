@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_app/common/main_colors.dart';
 import 'package:sport_app/common/theme/login_theme.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_state.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_bloc.dart';
@@ -14,7 +15,8 @@ class RegistrationBodyWidget extends StatelessWidget {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
       if (state is AuthenticationSuccess) {
-        Navigator.of(context).pushNamedAndRemoveUntil(MainNavigation.homePage,(Route<dynamic> route) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            MainNavigation.homePage, (Route<dynamic> route) => false);
       } else if (state is AuthenticationFailure) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Something went wrong: Registration failure')));
@@ -62,11 +64,15 @@ class SliderAgeWidget extends StatelessWidget {
           child: Text(
             'Age',
             style: TextStyle(
-                color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+              color: MainColors.mainBlack,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
+            ),
           ),
         ),
         Slider(
-          activeColor: Colors.black,
+          activeColor: MainColors.mainBlack,
           max: 100,
           inactiveColor: Colors.grey,
           divisions: 100,
@@ -94,11 +100,15 @@ class SliderWeightWidget extends StatelessWidget {
           child: Text(
             'Weight',
             style: TextStyle(
-                color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+              color: MainColors.mainBlack,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
+            ),
           ),
         ),
         Slider(
-          activeColor: Colors.black,
+          activeColor: MainColors.mainBlack,
           max: 200,
           inactiveColor: Colors.grey,
           divisions: 200,
@@ -119,7 +129,8 @@ class TextFieldNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding:
+          const EdgeInsets.only(top: 18.0, bottom: 18, left: 24, right: 24),
       child: TextFormField(
         autofocus: true,
         textInputAction: TextInputAction.next,
@@ -127,7 +138,7 @@ class TextFieldNameWidget extends StatelessWidget {
         controller: context.read<SignUpModel>().name,
         decoration: InputDecoration(
           labelText: 'Name',
-          labelStyle: TextStyle(color: Colors.black),
+          labelStyle: TextStyle(color: MainColors.mainBlack),
           enabledBorder: LoginTheme.borderDefault,
           focusedBorder: LoginTheme.borderDefault,
           errorBorder: LoginTheme.borderError,
@@ -144,7 +155,8 @@ class TextFieldEmailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding:
+          const EdgeInsets.only(top: 18.0, bottom: 18, left: 24, right: 24),
       child: TextFormField(
         textInputAction: TextInputAction.next,
         validator: (value) => context.read<SignUpModel>().validateEmail(),
@@ -162,7 +174,7 @@ class TextFieldEmailWidget extends StatelessWidget {
             ),
           ),
           labelText: 'Email',
-          labelStyle: TextStyle(color: Colors.black),
+          labelStyle: TextStyle(color: MainColors.mainBlack),
           helperText: 'Email format: test@test.com',
           helperStyle: TextStyle(
             fontWeight: FontWeight.w400,
@@ -184,7 +196,8 @@ class TextFieldPasswordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding:
+          const EdgeInsets.only(top: 18.0, bottom: 18, left: 24, right: 24),
       child: TextFormField(
         textInputAction: TextInputAction.next,
         validator: (value) => context.read<SignUpModel>().validatePassword(),
@@ -207,7 +220,7 @@ class TextFieldPasswordWidget extends StatelessWidget {
                 : Colors.grey),
           ),
           labelText: 'Password',
-          labelStyle: TextStyle(color: Colors.black),
+          labelStyle: TextStyle(color: MainColors.mainBlack),
           helperText: 'Password must be 8 or more characters',
           enabledBorder: LoginTheme.borderDefault,
           focusedBorder: LoginTheme.borderDefault,
@@ -225,7 +238,8 @@ class TextFieldConfirmPasswordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding:
+          const EdgeInsets.only(top: 18.0, bottom: 18, left: 24, right: 24),
       child: TextFormField(
         textInputAction: TextInputAction.done,
         validator: (value) => context.read<SignUpModel>().validatePassword(),
@@ -237,7 +251,7 @@ class TextFieldConfirmPasswordWidget extends StatelessWidget {
             color: Colors.blueGrey,
           ),
           labelText: 'Confirm Password',
-          labelStyle: TextStyle(color: Colors.black),
+          labelStyle: TextStyle(color: MainColors.mainBlack),
           enabledBorder: LoginTheme.borderDefault,
           focusedBorder: LoginTheme.borderDefault,
           errorBorder: LoginTheme.borderError,
@@ -248,16 +262,32 @@ class TextFieldConfirmPasswordWidget extends StatelessWidget {
   }
 }
 
+// class ToggleChoseGenderWidget extends StatelessWidget {
+//   const ToggleChoseGenderWidget({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ToggleButtons(
+//       children: [
+//         Icon(Icons.male),
+//         Icon(Icons.female),
+//       ],
+//       isSelected: ());
+//   }
+// }
+
 class ButtonSignUpWidget extends StatelessWidget {
   const ButtonSignUpWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding:
+          const EdgeInsets.only(top: 18.0, bottom: 18, left: 24, right: 24),
       child: TextButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(MainColors.mainBlack),
             overlayColor: MaterialStateProperty.all<Color>(Colors.white10)),
         onPressed: () {
           context.read<SignUpModel>().signUp(context);
@@ -267,7 +297,7 @@ class ButtonSignUpWidget extends StatelessWidget {
           child: Center(
             child: Text(
               'Get Started!',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: MainColors.mainWhite),
             ),
           ),
         ),

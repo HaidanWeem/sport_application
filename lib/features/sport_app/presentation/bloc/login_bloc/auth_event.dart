@@ -20,8 +20,8 @@ class SignUpStarted extends AuthenticationEvent {
   final String email;
   final String password;
   final String name;
-  final String age;
-  final String weight;
+  final double age;
+  final double weight;
 
   SignUpStarted(this.email, this.password, this.name, this.age, this.weight);
   @override

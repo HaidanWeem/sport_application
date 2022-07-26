@@ -1,5 +1,11 @@
-import 'package:sport_app/core/error/failure.dart';
+abstract class Exception {}
 
-class ServerException extends Failure {}
+class ServerException extends Exception {
+
+}
+
+class UnknownException extends Exception {
+
+}
 
 

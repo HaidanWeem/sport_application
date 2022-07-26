@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_app/common/main_colors.dart';
 import 'package:sport_app/common/theme/login_theme.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_state.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_bloc.dart';
@@ -57,7 +58,7 @@ class LoginBodyWidget extends StatelessWidget {
       child: Text(
         'SporteLite',
         style: TextStyle(
-            fontFamily: 'OpenSans', fontSize: 30, fontWeight: FontWeight.bold),
+            fontFamily: 'Poppins', fontSize: 30, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -71,14 +72,15 @@ class TextFieldLogin extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: TextFormField(
-        autofocus: true,
         textInputAction: TextInputAction.next,
         validator: (value) => context.read<SignInModel>().validateEmail(),
         controller: context.read<SignInModel>().login,
         decoration: InputDecoration(
           helperText: 'Email format: test@test.com',
           labelText: 'Email',
-          labelStyle: TextStyle(color: Colors.black),
+          labelStyle: TextStyle(
+            color: MainColors.mainBlack,
+          ),
           enabledBorder: LoginTheme.borderDefault,
           focusedBorder: LoginTheme.borderDefault,
           errorBorder: LoginTheme.borderError,
@@ -114,7 +116,9 @@ class TextFieldPassword extends StatelessWidget {
                 ? Colors.red
                 : Colors.grey),
           ),
-          labelStyle: TextStyle(color: Colors.black),
+          labelStyle: TextStyle(
+            color: MainColors.mainBlack,
+          ),
           enabledBorder: LoginTheme.borderDefault,
           focusedBorder: LoginTheme.borderDefault,
           errorBorder: LoginTheme.borderError,
@@ -134,8 +138,11 @@ class ButtonSignInWidget extends StatelessWidget {
       padding: const EdgeInsets.all(24.0),
       child: TextButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-            overlayColor: MaterialStateProperty.all<Color>(Colors.white10)),
+            backgroundColor: MaterialStateProperty.all<Color>(
+              MainColors.mainBlack,
+            ),
+            overlayColor:
+                MaterialStateProperty.all<Color>(MainColors.mainWhite)),
         onPressed: () {
           context.read<SignInModel>().signIn(context);
         },
@@ -144,7 +151,8 @@ class ButtonSignInWidget extends StatelessWidget {
           child: Center(
             child: Text(
               'Get Started!',
-              style: TextStyle(color: Colors.white),
+              style:
+                  TextStyle(color: MainColors.mainWhite, fontFamily: 'Poppins'),
             ),
           ),
         ),
@@ -162,15 +170,19 @@ class ButtonSignUpWidget extends StatelessWidget {
       padding: const EdgeInsets.all(18.0),
       child: TextButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            overlayColor: MaterialStateProperty.all<Color>(Colors.black12)),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(MainColors.mainWhite),
+            overlayColor: MaterialStateProperty.all<Color>(
+              MainColors.mainBlack,
+            )),
         onPressed: () {
           Navigator.of(context).pushNamed(MainNavigation.signUp);
         },
         child: Center(
           child: Text(
             'Sign Up',
-            style: TextStyle(color: Colors.black),
+            style:
+                TextStyle(color: MainColors.mainBlack, fontFamily: 'Poppins'),
           ),
         ),
       ),

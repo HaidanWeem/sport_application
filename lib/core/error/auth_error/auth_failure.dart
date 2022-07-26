@@ -6,14 +6,6 @@ class AuthServerFailure extends Failure {
   AuthServerFailure.printMessageFromServer(this.message) {
     print(message);
   }
-
-  // AuthServerFailure(this.message) {
-  //   getMessageError();
-  // }
-
-  // Widget getMessageError() {
-  //   return Text(message);
-  // }
 }
 
 class AuthCacheFailure extends Failure {}

@@ -7,7 +7,7 @@ abstract class FireBaseAuthDataSource {
   Future<MainUser> joinToAccount(String email, String password);
 
   Future<MainUser> signUpAccount(
-      String email, String password, String name, String age, String weight);
+      String email, String password, String name, double age, double weight);
 
   Future<void> signOut();
 
@@ -38,7 +38,7 @@ class FireBaseAuthDataSourceImpl implements FireBaseAuthDataSource {
 
   @override
   Future<MainUser> signUpAccount(String email, String password, String name,
-      String age, String weight) async {
+      double age, double weight) async {
     try {
       UserCredential result = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -58,8 +58,8 @@ class FireBaseAuthDataSourceImpl implements FireBaseAuthDataSource {
   Future<void> _firestoreSavingPersonalData({
     required String email,
     required String name,
-    required String age,
-    required String weight,
+    required double age,
+    required double weight,
   }) async {
     final user = FirebaseAuth.instance.currentUser;
     await db.collection('users').doc(user!.uid).set(

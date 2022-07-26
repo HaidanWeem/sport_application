@@ -6,6 +6,11 @@ import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_e
 class SignInModel extends ChangeNotifier {
   final formKeySignIn = GlobalKey<FormState>();
 
+  //Gender
+  bool male = false;
+  bool female = false;
+  //
+
   bool isHideCharacters = true;
   final login = TextEditingController();
   final password = TextEditingController();
@@ -62,8 +67,8 @@ class SignUpModel extends ChangeNotifier {
           login.text,
           password.text,
           name.text,
-          ageValue.toString(),
-          weightValue.toString(),
+          ageValue,
+          weightValue,
         ),
       );
     }

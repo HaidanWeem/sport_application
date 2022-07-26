@@ -1,10 +1,13 @@
 import 'package:either_dart/either.dart';
 import 'package:sport_app/core/error/auth_error/auth_exception.dart';
 import 'package:sport_app/core/error/auth_error/auth_failure.dart';
+import 'package:sport_app/core/error/exception.dart';
 import 'package:sport_app/core/error/failure.dart';
 import 'package:sport_app/core/platform/network_info.dart';
 import 'package:sport_app/features/sport_app/data/datasources/auth_datasources/remote_datasource.dart';
+import 'package:sport_app/features/sport_app/data/datasources/home_datasources/remote_datasource.dart';
 import 'package:sport_app/features/sport_app/data/models/mainuser.dart';
+import 'package:sport_app/features/sport_app/domain/entities/user.dart';
 import '../../domain/repositories/repositories.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -25,7 +28,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, MainUser>> signUpAccount(
       String email, String password, String name,
-      String age, String weight) async {
+      double age, double weight) async {
     return await _formAuth(() {
       return fireBaseAuthDataSource.signUpAccount(email, password, name, age, weight);
     });
@@ -41,7 +44,7 @@ class AuthRepositoryImpl implements AuthRepository {
         throw AuthUnknownFailure.messageFromServer(e.toString());
       }
     } else {
-      throw ServerFailure();
+      throw ServerFailure.printMessageFromServer('No internet connection');
     }
   }
 
@@ -56,3 +59,26 @@ class AuthRepositoryImpl implements AuthRepository {
     await fireBaseAuthDataSource.signOut();
   }
 }
+
+ class HomeRepositoryImpl implements HomeRepository {
+  final HomeRemoteDataSource homeDataSource;
+  final NetworkInfo networkInfo;
+
+  HomeRepositoryImpl(
+      {required this.homeDataSource, required this.networkInfo});
+
+  Future<Either<Failure, CurrentUser>> getUser() async {
+     if (await networkInfo.IsConnected) {
+      try {
+        final user = await homeDataSource.getUser();
+        return Right(user);
+      } on UnknownException catch (error) {
+        throw UnknownFailure.printMessageFromServer(error.toString());
+      }
+    } else {
+      throw ServerFailure.printMessageFromServer('No internet connection');
+    }
+  }
+  }
+
+
