@@ -11,7 +11,8 @@ class SignUpAccount extends UseCase<void, RegisterParams> {
   SignUpAccount(this.authRepository);
 
   Future<Either<Failure, MainUser>> call(RegisterParams params) async {
-    return await authRepository.signUpAccount(params.email, params.password, params.name, params.age, params.weight);
+    return await authRepository.signUpAccount(
+        params.email, params.password, params.name, params.age, params.weight, params.isMale);
   }
 
   Stream<MainUser?> get currentUser => authRepository.currentUser;
@@ -19,8 +20,17 @@ class SignUpAccount extends UseCase<void, RegisterParams> {
 
 class RegisterParams extends Equatable {
   final String email, password, name;
-  final double age,  weight;
-  RegisterParams({required this.name,required this.age, required this.weight, required this.email, required this.password});
+  final double age, weight;
+  final bool isMale;
+  RegisterParams(
+      
+      {
+      required this.isMale, 
+      required this.name,
+      required this.age,
+      required this.weight,
+      required this.email,
+      required this.password});
   @override
   List<Object> get props => [email, password];
 }

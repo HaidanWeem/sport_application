@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_bloc.dart';
@@ -6,10 +7,7 @@ import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_e
 class SignInModel extends ChangeNotifier {
   final formKeySignIn = GlobalKey<FormState>();
 
-  //Gender
-  bool male = false;
-  bool female = false;
-  //
+  
 
   bool isHideCharacters = true;
   final login = TextEditingController();
@@ -51,6 +49,21 @@ class SignInModel extends ChangeNotifier {
 class SignUpModel extends ChangeNotifier {
   final formKeySignUp = GlobalKey<FormState>();
 
+  //Gender
+  bool _isMale = true;
+
+  bool get isMale => this._isMale;
+
+  set isMale(bool value) {
+    this._isMale = value;
+    notifyListeners();
+  }
+
+  get color => _isMale ? Colors.blue : Colors.pink;
+  get maleColor => _isMale ? Colors.blue : Colors.grey;
+  get femaleColor => _isMale ? Colors.grey : Colors.pink;
+  //
+
   double ageValue = 1;
   double weightValue = 1.0;
 
@@ -69,6 +82,7 @@ class SignUpModel extends ChangeNotifier {
           name.text,
           ageValue,
           weightValue,
+          _isMale,
         ),
       );
     }

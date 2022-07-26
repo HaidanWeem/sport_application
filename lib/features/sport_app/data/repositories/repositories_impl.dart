@@ -28,9 +28,9 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, MainUser>> signUpAccount(
       String email, String password, String name,
-      double age, double weight) async {
+      double age, double weight, bool isMale) async {
     return await _formAuth(() {
-      return fireBaseAuthDataSource.signUpAccount(email, password, name, age, weight);
+      return fireBaseAuthDataSource.signUpAccount(email, password, name, age, weight, isMale);
     });
   }
 

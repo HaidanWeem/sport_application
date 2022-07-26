@@ -10,19 +10,21 @@ class RegistrationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(10),
+          ),
+        ),
         title: Text(
           'Sign Up',
           style: TextStyle(
-              fontFamily: 'OpenSans',
-              fontSize: 20,
-              fontWeight: FontWeight.bold),
+              fontFamily: 'Poppins', fontSize: 20, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.black,
         centerTitle: true,
       ),
       body: ChangeNotifierProvider<SignUpModel>(
-        create: (_) => SignUpModel(),
-        child: RegistrationBodyWidget()),
+          create: (_) => SignUpModel(), child: RegistrationBodyWidget()),
     );
   }
 }

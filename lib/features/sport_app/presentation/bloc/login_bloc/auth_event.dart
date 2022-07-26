@@ -22,8 +22,9 @@ class SignUpStarted extends AuthenticationEvent {
   final String name;
   final double age;
   final double weight;
+  final bool isMale;
 
-  SignUpStarted(this.email, this.password, this.name, this.age, this.weight);
+  SignUpStarted(this.email, this.password, this.name, this.age, this.weight, this.isMale);
   @override
   List<Object> get props => [];
 }

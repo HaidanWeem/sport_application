@@ -8,7 +8,7 @@ abstract class AuthRepository {
       String email, String password);
   Future<Either<Failure, MainUser>> signUpAccount(
       String email, String password, String name,
-      double age, double weight);
+      double age, double weight, bool isMale);
   Stream<MainUser?> get currentUser;
   Future<String?> retrieveUserName(MainUser user);
   Future<void> signOut();

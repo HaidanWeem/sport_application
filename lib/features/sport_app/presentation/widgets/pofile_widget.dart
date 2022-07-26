@@ -40,6 +40,9 @@ class _ProfileBodyState extends State<ProfileBody> {
       if (state is MainIsLoading) {
         return Center(child: CircularProgressIndicator());
       } else if (state is MainIsLoaded) {
+        final gender = state.user.isMale == true
+            ? MainImages.mainMan
+            : MainImages.mainWomen;
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -70,8 +73,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                         .withOpacity(0.5),
                                     spreadRadius: 0.5,
                                     blurRadius: 2,
-                                    offset: Offset(
-                                        3, 5), // changes position of shadow
+                                    offset: Offset(3, 5),
                                   ),
                                 ],
                               ),
@@ -107,7 +109,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                             ),
                                           ),
                                           Text(
-                                            state.user.age.toString(),
+                                            state.user.age.round().toString(),
                                             style: TextStyle(
                                               color: MainColors.mainWhite,
                                               fontFamily: 'Poppins',
@@ -144,7 +146,9 @@ class _ProfileBodyState extends State<ProfileBody> {
                                             ),
                                           ),
                                           Text(
-                                            state.user.weight.toString(),
+                                            state.user.weight
+                                                .round()
+                                                .toString(),
                                             style: TextStyle(
                                               color: MainColors.mainWhite,
                                               fontFamily: 'Poppins',
@@ -168,7 +172,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                             child: Center(
                               child: Container(
                                 child: Image.asset(
-                                  MainImages.mainMan,
+                                  gender,
                                   width: innerWidth * 0.45,
                                   fit: BoxFit.fitWidth,
                                 ),

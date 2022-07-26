@@ -33,6 +33,7 @@ class AuthenticationBloc
           name: event.name,
           age: event.age,
           weight: event.weight,
+          isMale: event.isMale,
         ));
         emit(AuthenticationSuccess());
       } catch (e) {

@@ -6,8 +6,8 @@ import 'package:sport_app/features/sport_app/data/models/mainuser.dart';
 abstract class FireBaseAuthDataSource {
   Future<MainUser> joinToAccount(String email, String password);
 
-  Future<MainUser> signUpAccount(
-      String email, String password, String name, double age, double weight);
+  Future<MainUser> signUpAccount(String email, String password, String name,
+      double age, double weight, bool isMale);
 
   Future<void> signOut();
 
@@ -38,13 +38,13 @@ class FireBaseAuthDataSourceImpl implements FireBaseAuthDataSource {
 
   @override
   Future<MainUser> signUpAccount(String email, String password, String name,
-      double age, double weight) async {
+      double age, double weight, bool isMale) async {
     try {
       UserCredential result = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       if (result.user!.uid.isNotEmpty && result.user!.email!.isNotEmpty) {
         _firestoreSavingPersonalData(
-            email: email, name: name, age: age, weight: weight);
+            email: email, name: name, age: age, weight: weight, isMale: isMale);
         return MainUser.fromFireBase(result.user!);
       } else {
         throw AuthServerFailure.printMessageFromServer('id or email is null');
@@ -60,10 +60,17 @@ class FireBaseAuthDataSourceImpl implements FireBaseAuthDataSource {
     required String name,
     required double age,
     required double weight,
+    required bool isMale,
   }) async {
     final user = FirebaseAuth.instance.currentUser;
     await db.collection('users').doc(user!.uid).set(
-      {'Name': name, 'Email': email, 'Age': age, 'Weight': weight},
+      {
+        'Name': name,
+        'Email': email,
+        'Age': age,
+        'Weight': weight,
+        'IsMale': isMale,
+      },
     );
   }
 

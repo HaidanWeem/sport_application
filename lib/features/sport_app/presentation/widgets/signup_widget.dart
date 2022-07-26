@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:sport_app/common/main_colors.dart';
 import 'package:sport_app/common/theme/login_theme.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_state.dart';
@@ -41,6 +42,7 @@ class RegistrationBodyWidget extends StatelessWidget {
                 SliderWeightWidget(),
                 TextFieldPasswordWidget(),
                 TextFieldConfirmPasswordWidget(),
+                PickGenderWidget(),
                 ButtonSignUpWidget(),
               ],
             ),
@@ -262,19 +264,77 @@ class TextFieldConfirmPasswordWidget extends StatelessWidget {
   }
 }
 
-// class ToggleChoseGenderWidget extends StatelessWidget {
-//   const ToggleChoseGenderWidget({Key? key}) : super(key: key);
+class PickGenderWidget extends StatelessWidget {
+  const PickGenderWidget({Key? key}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return ToggleButtons(
-//       children: [
-//         Icon(Icons.male),
-//         Icon(Icons.female),
-//       ],
-//       isSelected: ());
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(width: 20),
+        // MALE
+        Expanded(
+          child: Consumer<SignUpModel>(
+            builder: (context, genderProvider, _) => GestureDetector(
+              onTap: () {
+                genderProvider.isMale = true;
+              },
+              child: Container(
+                height: 70,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: genderProvider.maleColor,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: Text(
+                    'Male',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: genderProvider.maleColor,
+                        fontFamily: 'Poppins'),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(width: 20),
+        Expanded(
+          child: Consumer<SignUpModel>(
+            builder: (context, genderProvider, _) => GestureDetector(
+              onTap: () {
+                genderProvider.isMale = false;
+              },
+              child: Container(
+                height: 70,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: genderProvider.femaleColor,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: Text(
+                    'Female',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: genderProvider.femaleColor,
+                        fontFamily: 'Poppins'),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(width: 20),
+      ],
+    );
+  }
+}
 
 class ButtonSignUpWidget extends StatelessWidget {
   const ButtonSignUpWidget({Key? key}) : super(key: key);
@@ -297,7 +357,8 @@ class ButtonSignUpWidget extends StatelessWidget {
           child: Center(
             child: Text(
               'Get Started!',
-              style: TextStyle(color: MainColors.mainWhite),
+              style:
+                  TextStyle(color: MainColors.mainWhite, fontFamily: 'Poppins'),
             ),
           ),
         ),
