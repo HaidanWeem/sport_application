@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:sport_app/common/app_localizations.dart';
 import 'package:sport_app/common/main_colors.dart';
 import 'package:sport_app/common/theme/login_theme.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_state.dart';
@@ -20,7 +21,8 @@ class RegistrationBodyWidget extends StatelessWidget {
             MainNavigation.homePage, (Route<dynamic> route) => false);
       } else if (state is AuthenticationFailure) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('Something went wrong: Registration failure')));
+            content: Text(AppLocalizations.of(context)
+                .translate("Registration_failure")!)));
       }
     }, builder: (context, state) {
       if (state is AuthenticationIsLoading) {
@@ -35,7 +37,7 @@ class RegistrationBodyWidget extends StatelessWidget {
           child: Form(
             key: context.read<SignUpModel>().formKeySignUp,
             child: Column(
-              children: [
+              children: const [
                 TextFieldNameWidget(),
                 TextFieldEmailWidget(),
                 SliderAgeWidget(),
@@ -64,8 +66,8 @@ class SliderAgeWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Text(
-            'Age',
-            style: TextStyle(
+            AppLocalizations.of(context).translate("Age")!,
+            style: const TextStyle(
               color: MainColors.mainBlack,
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -100,8 +102,8 @@ class SliderWeightWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Text(
-            'Weight',
-            style: TextStyle(
+            AppLocalizations.of(context).translate("Weight")!,
+            style: const TextStyle(
               color: MainColors.mainBlack,
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -136,11 +138,11 @@ class TextFieldNameWidget extends StatelessWidget {
       child: TextFormField(
         autofocus: true,
         textInputAction: TextInputAction.next,
-        validator: (value) => context.read<SignUpModel>().validateName(),
+        validator: (value) => context.read<SignUpModel>().validateName(context),
         controller: context.read<SignUpModel>().name,
         decoration: InputDecoration(
-          labelText: 'Name',
-          labelStyle: TextStyle(color: MainColors.mainBlack),
+          labelText: AppLocalizations.of(context).translate("Name")!,
+          labelStyle: const TextStyle(color: MainColors.mainBlack),
           enabledBorder: LoginTheme.borderDefault,
           focusedBorder: LoginTheme.borderDefault,
           errorBorder: LoginTheme.borderError,
@@ -161,24 +163,25 @@ class TextFieldEmailWidget extends StatelessWidget {
           const EdgeInsets.only(top: 18.0, bottom: 18, left: 24, right: 24),
       child: TextFormField(
         textInputAction: TextInputAction.next,
-        validator: (value) => context.read<SignUpModel>().validateEmail(),
+        validator: (value) =>
+            context.read<SignUpModel>().validateEmail(context),
         controller: context.read<SignUpModel>().login,
         decoration: InputDecoration(
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.email,
             color: Colors.blueGrey,
           ),
           suffixIcon: IconButton(
             onPressed: () => context.read<SignUpModel>().deleteEmailField(),
-            icon: Icon(
+            icon: const Icon(
               Icons.delete_outline,
               color: Colors.red,
             ),
           ),
-          labelText: 'Email',
-          labelStyle: TextStyle(color: MainColors.mainBlack),
-          helperText: 'Email format: test@test.com',
-          helperStyle: TextStyle(
+          labelText: AppLocalizations.of(context).translate("Email"),
+          labelStyle: const TextStyle(color: MainColors.mainBlack),
+          helperText: AppLocalizations.of(context).translate("Email_format"),
+          helperStyle: const TextStyle(
             fontWeight: FontWeight.w400,
           ),
           enabledBorder: LoginTheme.borderDefault,
@@ -202,11 +205,12 @@ class TextFieldPasswordWidget extends StatelessWidget {
           const EdgeInsets.only(top: 18.0, bottom: 18, left: 24, right: 24),
       child: TextFormField(
         textInputAction: TextInputAction.next,
-        validator: (value) => context.read<SignUpModel>().validatePassword(),
+        validator: (value) =>
+            context.read<SignUpModel>().validatePassword(context),
         obscureText: context.watch<SignUpModel>().isHideCharacters,
         controller: context.read<SignUpModel>().password,
         decoration: InputDecoration(
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.password,
             color: Colors.blueGrey,
           ),
@@ -221,9 +225,10 @@ class TextFieldPasswordWidget extends StatelessWidget {
                 ? Colors.red
                 : Colors.grey),
           ),
-          labelText: 'Password',
-          labelStyle: TextStyle(color: MainColors.mainBlack),
-          helperText: 'Password must be 8 or more characters',
+          labelText: AppLocalizations.of(context).translate("Password"),
+          labelStyle: const TextStyle(color: MainColors.mainBlack),
+          helperText: AppLocalizations.of(context)
+              .translate("Password_must_be_8_or_more_characters"),
           enabledBorder: LoginTheme.borderDefault,
           focusedBorder: LoginTheme.borderDefault,
           errorBorder: LoginTheme.borderError,
@@ -244,16 +249,17 @@ class TextFieldConfirmPasswordWidget extends StatelessWidget {
           const EdgeInsets.only(top: 18.0, bottom: 18, left: 24, right: 24),
       child: TextFormField(
         textInputAction: TextInputAction.done,
-        validator: (value) => context.read<SignUpModel>().validatePassword(),
+        validator: (value) =>
+            context.read<SignUpModel>().validatePassword(context),
         obscureText: context.watch<SignUpModel>().isHideCharacters,
         controller: context.read<SignUpModel>().confirmPassword,
         decoration: InputDecoration(
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.password,
             color: Colors.blueGrey,
           ),
-          labelText: 'Confirm Password',
-          labelStyle: TextStyle(color: MainColors.mainBlack),
+          labelText: AppLocalizations.of(context).translate("Confirm_Password"),
+          labelStyle: const TextStyle(color: MainColors.mainBlack),
           enabledBorder: LoginTheme.borderDefault,
           focusedBorder: LoginTheme.borderDefault,
           errorBorder: LoginTheme.borderError,
@@ -271,7 +277,7 @@ class PickGenderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
         // MALE
         Expanded(
           child: Consumer<SignUpModel>(
@@ -289,7 +295,7 @@ class PickGenderWidget extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    'Male',
+                    AppLocalizations.of(context).translate("Male")!,
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
@@ -301,7 +307,7 @@ class PickGenderWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
         Expanded(
           child: Consumer<SignUpModel>(
             builder: (context, genderProvider, _) => GestureDetector(
@@ -318,7 +324,7 @@ class PickGenderWidget extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    'Female',
+                    AppLocalizations.of(context).translate("Female")!,
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
@@ -330,7 +336,7 @@ class PickGenderWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
       ],
     );
   }
@@ -356,9 +362,11 @@ class ButtonSignUpWidget extends StatelessWidget {
           width: double.infinity,
           child: Center(
             child: Text(
-              'Get Started!',
-              style:
-                  TextStyle(color: MainColors.mainWhite, fontFamily: 'Poppins'),
+              AppLocalizations.of(context).translate("Get_Started")!,
+              style: const TextStyle(
+                  color: MainColors.mainWhite,
+                  fontFamily: 'Poppins',
+                  fontSize: 18,),
             ),
           ),
         ),

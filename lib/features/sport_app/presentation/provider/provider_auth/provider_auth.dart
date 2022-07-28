@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_app/common/app_localizations.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_bloc.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_event.dart';
 
@@ -25,21 +25,21 @@ class SignInModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? validateEmail() {
+  String? validateEmail(BuildContext context) {
     if (login.text.isEmpty) {
-      return 'Email is required';
+      return AppLocalizations.of(context).translate("Email_is_required");
     } else if (!login.text.contains('@')) {
-      return 'Invalid email address';
+      return AppLocalizations.of(context).translate("Invalid_email_address");
     } else {
       return null;
     }
   }
 
-  String? validatePassword() {
+  String? validatePassword(BuildContext context) {
     if (password.text.isEmpty) {
-      return 'Password is required';
+      return AppLocalizations.of(context).translate("Password_is_required");
     } else if (password.text.length < 8) {
-      return 'Password is too short. Must be 8 characters';
+      return  AppLocalizations.of(context).translate("Password_is_too_short._Must_be_8_characters");
     } else {
       return null;
     }
@@ -110,34 +110,34 @@ class SignUpModel extends ChangeNotifier {
     }
   }
 
-  String? validateName() {
+  String? validateName(BuildContext context) {
     final _nameExp = RegExp(r'^[A-Za-z ]+$');
     if (name.text.isEmpty) {
-      return 'Name is required';
+      return AppLocalizations.of(context).translate("Name_is_required");
     } else if (!_nameExp.hasMatch(name.text)) {
-      return 'Please enter alphabetical characters';
+      return AppLocalizations.of(context).translate("Please_enter_alphabetical_characters");
     } else {
       return null;
     }
   }
 
-  String? validateEmail() {
+  String? validateEmail(BuildContext context) {
     if (login.text.isEmpty) {
-      return 'Email is required';
+      return AppLocalizations.of(context).translate("Email_is_required");
     } else if (!login.text.contains('@')) {
-      return 'Invalid email address';
+      return AppLocalizations.of(context).translate("Invalid_email_address");
     } else {
       return null;
     }
   }
 
-  String? validatePassword() {
+  String? validatePassword(BuildContext context) {
     if (password.text.isEmpty) {
-      return 'Password is required';
+      return AppLocalizations.of(context).translate("Password_is_required");
     } else if (password.text.length < 8) {
-      return 'Password is too short. Must be 8 characters';
+      return AppLocalizations.of(context).translate("Password_is_too_short._Must_be_8_characters");
     } else if (password.text != confirmPassword.text) {
-      return 'Password does not match';
+      return AppLocalizations.of(context).translate("Password_does_not_match");
     } else {
       return null;
     }

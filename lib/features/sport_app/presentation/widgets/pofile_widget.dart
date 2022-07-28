@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_app/common/app_localizations.dart';
 import 'package:sport_app/common/main_colors.dart';
 import 'package:sport_app/common/main_images.dart';
 import 'package:sport_app/features/sport_app/presentation/bloc/login_bloc/auth_bloc.dart';
@@ -31,14 +32,14 @@ class _ProfileBodyState extends State<ProfileBody> {
     return BlocConsumer<MainBloc, MainState>(listener: (context, state) {
       if (state is MainUserFailure) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Unknown User')));
+            .showSnackBar(  SnackBar(content: Text(AppLocalizations.of(context).translate("Unknown_User")!)));
       } else if (state is UnAuthenticated) {
         Navigator.of(context).pushNamedAndRemoveUntil(
             MainNavigation.auth, (Route<dynamic> route) => false);
       }
     }, builder: (context, state) {
       if (state is MainIsLoading) {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       } else if (state is MainIsLoaded) {
         final gender = state.user.isMale == true
             ? MainImages.mainMan
@@ -69,22 +70,22 @@ class _ProfileBodyState extends State<ProfileBody> {
                                 color: MainColors.mainBlack,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromARGB(255, 118, 118, 118)
+                                    color: const Color.fromARGB(255, 118, 118, 118)
                                         .withOpacity(0.5),
                                     spreadRadius: 0.5,
                                     blurRadius: 2,
-                                    offset: Offset(3, 5),
+                                    offset: const Offset(3, 5),
                                   ),
                                 ],
                               ),
                               child: Column(
                                 children: [
-                                  SizedBox(
+                                 const SizedBox(
                                     height: 80,
                                   ),
                                   Text(
                                     state.user.name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: MainColors.mainWhite,
                                       fontFamily: 'Poppins',
                                       fontSize: 37,
@@ -92,7 +93,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  SizedBox(
+                                 const SizedBox(
                                     height: 5,
                                   ),
                                   Row(
@@ -101,7 +102,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                       Column(
                                         children: [
                                           Text(
-                                            'Age',
+                                            AppLocalizations.of(context).translate("Age")!,
                                             style: TextStyle(
                                               color: Colors.grey[400],
                                               fontFamily: 'Poppins',
@@ -110,7 +111,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                           ),
                                           Text(
                                             state.user.age.round().toString(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: MainColors.mainWhite,
                                               fontFamily: 'Poppins',
                                               fontSize: 25,
@@ -138,7 +139,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                       Column(
                                         children: [
                                           Text(
-                                            'Weight',
+                                            AppLocalizations.of(context).translate("Weight")!,
                                             style: TextStyle(
                                               color: Colors.grey[400],
                                               fontFamily: 'Poppins',
@@ -149,7 +150,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                             state.user.weight
                                                 .round()
                                                 .toString(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: MainColors.mainWhite,
                                               fontFamily: 'Poppins',
                                               fontSize: 25,
@@ -195,10 +196,10 @@ class _ProfileBodyState extends State<ProfileBody> {
                     color: MainColors.mainBlack,
                     boxShadow: [
                       BoxShadow(
-                        color: Color.fromARGB(255, 71, 71, 71).withOpacity(0.5),
+                        color: const Color.fromARGB(255, 71, 71, 71).withOpacity(0.5),
                         spreadRadius: 0.5,
                         blurRadius: 2,
-                        offset: Offset(3, 5), // changes position of shadow
+                        offset: const Offset(3, 5),
                       ),
                     ],
                   ),
@@ -206,7 +207,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                     child: Column(
                       children: [
                         Text(
-                          'Email',
+                          AppLocalizations.of(context).translate("Email")!,
                           style: TextStyle(
                             color: Colors.grey[400],
                             fontFamily: 'Poppins',
@@ -215,7 +216,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                         ),
                         Text(
                           state.user.email.toString(),
-                          style: TextStyle(
+                          style:  const TextStyle(
                             color: MainColors.mainWhite,
                             fontFamily: 'Poppins',
                             fontSize: 25,
@@ -238,10 +239,10 @@ class _ProfileBodyState extends State<ProfileBody> {
                     color: MainColors.mainBlack,
                     boxShadow: [
                       BoxShadow(
-                        color: Color.fromARGB(255, 71, 71, 71).withOpacity(0.5),
+                        color: const Color.fromARGB(255, 71, 71, 71).withOpacity(0.5),
                         spreadRadius: 0.5,
                         blurRadius: 2,
-                        offset: Offset(3, 5),
+                        offset: const Offset(3, 5),
                       ),
                     ],
                   ),
@@ -253,7 +254,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                             MainNavigation.auth,
                             (Route<dynamic> route) => false);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.exit_to_app_outlined,
                         color: Colors.white,
                         size: 30,
@@ -264,7 +265,7 @@ class _ProfileBodyState extends State<ProfileBody> {
           ),
         );
       } else {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       }
     });
   }

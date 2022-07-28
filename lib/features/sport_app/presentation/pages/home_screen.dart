@@ -18,14 +18,8 @@ class HomeScreen extends StatelessWidget {
       ],
       child: ChangeNotifierProvider<Home>(
         create: (context) => Home(),
-        child: HomeScreenBody()),
+        child: const HomeScreenBody()),
     );
   }
 }
 
-
-
-// BlocProvider.of<AuthenticationBloc>(context)
-//                     .add(AuthenticationSignOut());
-//                 Navigator.of(context).pushNamedAndRemoveUntil(
-//                     MainNavigation.auth, (Route<dynamic> route) => false);

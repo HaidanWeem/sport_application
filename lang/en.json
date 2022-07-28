@@ -1,0 +1,44 @@
+{
+    "Choose_what_type_of_training_you_want" : "Choose what type of training you want",
+    "Hello" : "Hello",
+    "Beginner" : "Beginner",
+    "Middle" : "Middle",
+    "Advanced" : "Advanced",
+
+    "Profile" : "Profile",
+    "Unknown_User" : "Unknown User",
+    "Age" : "Age",
+    "Weight" : "Weight",
+
+    "Something_went_wrong" : "Something went wrong",
+    "Email_format" : "Email format: test@test.com",
+    "Email" : "Email",
+    "Password_must_be_8_or_more_characters" : "Password must be 8 or more characters",
+    "Password" : "Password",
+
+    "Email_is_required" : "Email is required",
+    "Invalid_email_address" : "Invalid email address",
+    "Password_is_required" : "Password is required",
+    "Password_is_too_short._Must_be_8_characters" : "Password is too short. Must be 8 characters",
+
+    "Name_is_required" : "Name is required",
+    "Please_enter_alphabetical_characters" : "Please enter alphabetical characters",
+    "Password_does_not_match" : "Password does not match",
+    "Confirm_Password" : "Confirm Password",
+    "Name" : "Name",
+    "Male" : "Male",
+    "Female" : "Female",
+
+    "Registration_failure" : "Something went wrong: Registration failure",
+
+
+
+
+    "Sign_Up" : "Sign Up",
+
+
+
+    "Get_Started" : "Get Started!"
+
+
+}

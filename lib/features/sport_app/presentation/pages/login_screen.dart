@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
       child: Scaffold(
         body: ChangeNotifierProvider<SignInModel>(
             create: (_) => SignInModel(),
-            child: LoginBodyWidget()),
+            child: const LoginBodyWidget()),
       ),
     );
   }

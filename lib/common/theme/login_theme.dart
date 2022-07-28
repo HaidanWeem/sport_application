@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 abstract class LoginTheme {
-  static final borderDefault = OutlineInputBorder(
+  static const  borderDefault =  OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.zero),
   );
-  static final borderError = OutlineInputBorder(
+  static const borderError = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.zero),
     borderSide: BorderSide(color: Colors.red),
   );
